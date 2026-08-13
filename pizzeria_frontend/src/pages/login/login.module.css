@@ -1,0 +1,42 @@
+.loginForm {
+  max-width: 400px;
+  margin: 2em auto;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: #dfd4d1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.loginForm div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.loginForm label {
+  padding: 6px 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.loginForm input {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.loginForm input:focus {
+  border-color: #4a4a4a;
+  outline: none;
+}
+
+/* Valideringsfejl fra yup vises i rødt under feltet. */
+.error {
+  margin-top: 4px;
+  color: #b3261e;
+  font-size: 14px;
+}

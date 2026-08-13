@@ -1,0 +1,13 @@
+.employeeCard {
+  img {
+    width: 100%;
+  }
+
+  figcaption {
+    text-align: center;
+
+    h3 {
+      font-size: 30px;
+    }
+  }
+}

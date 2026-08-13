@@ -1,0 +1,108 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  padding: 1em 2em;
+  align-items: center;
+  background-color: #4a4a4a41;
+
+  img {
+    width: 60px;
+    opacity: 70%;
+  }
+
+  .logo {
+    width: 50px;
+    margin: 9px 0 1px;
+  }
+}
+
+.burger-menu {
+  position: relative;
+  z-index: 300;
+  cursor: pointer;
+  font-size: 25px;
+  color: white;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  div {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.nav-links {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #4a4a4a;
+  padding-top: 10em;
+  margin: 0;
+  align-items: center;
+
+  &.open {
+    display: flex;
+  }
+
+  li {
+    padding: 1rem;
+    text-align: center;
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      transition: color 0.3s;
+      font-family: "Just Another Hand", cursive;
+      font-size: 40px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+      }
+
+      &:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    height: auto;
+    padding-top: 20px;
+
+    li {
+      padding: 0;
+      margin: 0 1rem;
+    }
+  }
+}
