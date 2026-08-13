@@ -1,0 +1,6 @@
+.loading {
+  margin: 40vh auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

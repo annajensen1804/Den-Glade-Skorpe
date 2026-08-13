@@ -1,0 +1,104 @@
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form div {
+  margin-bottom: 15px;
+}
+
+.form label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form select {
+  width: 100%;
+}
+
+.form input[type="text"]:focus,
+.form input[type="number"]:focus,
+.form input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #0056b3;
+}
+
+/* Valideringsfejl fra yup vises i rødt under feltet. */
+.error {
+  display: block;
+  margin-top: 4px;
+  color: #b3261e;
+  font-size: 14px;
+  text-shadow: none;
+}
+
+.messageForm {
+  background-color: #dfd4d1;
+  padding: 2em;
+  div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  label {
+    padding: 10px;
+    text-shadow: 1px 1px 4px black;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    div {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}

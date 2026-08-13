@@ -1,0 +1,11 @@
+.dishList {
+  display: flex;
+  padding: 2em 0;
+}
+
+.categoriesSection {
+  display: flex;
+  background-color: #dfd4d1;
+  padding: 1em 0;
+  justify-content: center;
+}

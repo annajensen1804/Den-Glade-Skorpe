@@ -1,0 +1,23 @@
+.imgContainer {
+  padding: 2em;
+}
+
+.detailSection {
+  background-color: #dfd4d1;
+  padding: 1em;
+  h3 {
+    font-size: 35px;
+    margin: 20px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  select {
+    width: 200px;
+    margin: 0 auto;
+  }
+}
