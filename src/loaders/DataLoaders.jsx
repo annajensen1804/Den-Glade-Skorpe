@@ -23,6 +23,11 @@ export const homeLoader = async () => {
   return { dishes, categories };
 };
 
+// Ingredienser-loader
+export const ingredientsLoader = async () => {
+  return getData("/ingredients")
+}
+
 // Personale-siden
 export const employeesLoader = async () => {
   return getData("/employees");
@@ -69,7 +74,7 @@ export const dishDetailsLoader = async ({ params }) => {
 // };
 // ═════════════════════════════════════════════════════════════════════════
 
-export const backofficeLoader = async () => {
+/* export const backofficeLoader = async () => {
   const [dishes, orders, messages, employees, categories, ingredients] =
     await Promise.all([
       getData("/dishes"),
@@ -81,4 +86,4 @@ export const backofficeLoader = async () => {
     ]);
 
     return { dishes, orders, messages, employees, categories, ingredients };
-};
+}; */
