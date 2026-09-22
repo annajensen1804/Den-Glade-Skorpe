@@ -15,6 +15,7 @@ import Loading from "./components/loading/Loading";
 import ErrorElement from "./components/feedbackElements/ErrorElement";
 import {
   
+  backofficeLoader,
   dishDetailsLoader,
   employeesLoader,
   homeLoader,
@@ -22,6 +23,7 @@ import {
 } from "./loaders/DataLoaders";
 import { basename } from "./settings";
 import Ingredients from "./components/ingredients/Ingredients";
+import Backoffice from "./pages/Backoffice";
 /* import Backoffice from "./pages/backoffice/Backoffice"; */
 /* import DishesSection from "./pages/backoffice/components/DishesSection";
 import EmployeesSection from "./pages/backoffice/components/EmployeesSection"; */
@@ -55,12 +57,12 @@ const routes = createBrowserRouter(
           errorElement={<ErrorElement />}
         />
 
-        <Route
+{/*         <Route
           path="ingredients"
           element={<Ingredients />}
           loader={ingredientsLoader}
           errorElement={<ErrorElement />}
-        />
+        /> */}
 
         <Route path="contact" element={<Contact />} />
         <Route path="basket" element={<Basket />} />
@@ -71,14 +73,13 @@ const routes = createBrowserRouter(
 
       {/* <Route element={<ProtectedRoute />}> */}
 
-      {/* Backoffice - without main Navigation */}
-      {/* <Route
+      <Route
         path="backoffice"
         element={<Backoffice />}
         loader={backofficeLoader}
         errorElement={<ErrorElement />}
-      /> */}
-      {/* </Route> */}
+      /> 
+
     </Route>,
   ),
   { basename },

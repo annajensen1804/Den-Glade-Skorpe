@@ -1,10 +1,8 @@
-import { useLoaderData } from "react-router";
 import style from "./ingredients.module.css";
 import { useCrud } from "../../hooks/useCrud";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { serverPath } from "../../settings";
 import { useState } from "react";
 
 // Fælles validering skema
@@ -110,8 +108,7 @@ const EditIngForm = ({ editing, onClose }) => {
 };
 
 // List af ingredienser 
-const Ingredients = () => {
-  const ingredients = useLoaderData();
+const Ingredients = ({ ingredients = [] }) => {
   const [editing, setEditing] = useState(null);
 
   const { remove } = useCrud();
@@ -126,7 +123,9 @@ const Ingredients = () => {
             <div className={style.buttons}>
               <button onClick={() => setEditing(ing)}>Rediger</button>
 
-              <button onClick={() => remove("ingredient", ing._id)}>Slet</button>
+              <button onClick={() => remove("ingredient", ing._id)}>
+                Slet
+              </button>
             </div>
           </li>
         ))}
