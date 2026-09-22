@@ -74,14 +74,13 @@ const EditIngForm = ({ editing, onClose }) => {
   });
 
   const onSubmit = async (data) => {
-    const currentId = editing._id;
 
     try {
       const res = await fetch(`${serverPath}/ingredient`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: currentId,
+          id: editing._id,
           name: data.name,
           description: data.description,
         }),
@@ -120,9 +119,21 @@ const EditIngForm = ({ editing, onClose }) => {
   );
 };
 
+const handleDelete = async (ing) => {
+    const sikker = window.confirm(`Vil du slette "${ing.name}"?`);
+    
+    if (!sikker) return;
+    
+    const res = await fetch(`${serverPath}/ingredient/${ing._id}`, {
+        method: "DELETE",
+    });
+        if (!res.ok) return console.log("Kunne ikke slette", res.status);
+        console.log("Slettet");
+}
+
 // List af ingredienser 
 const Ingredients = () => {
-  const ingredients = useLoaderData() || [];
+  const ingredients = useLoaderData();
   const [editing, setEditing] = useState(null);
 
   return (
@@ -130,22 +141,20 @@ const Ingredients = () => {
       <h2>Ingredienser</h2>
       <ul>
         {ingredients.map((ing) => (
-          <li key={ing._id || ing.id}>
+          <li key={ing._id}>
             {ing.name} - {ing.description}
-           
-            <button
-              onClick={() => setEditing(ing)}
-              style={{ marginLeft: "10px" }}
-            >
-              Rediger
-            </button>
+            <div className={style.buttons}>
+              <button onClick={() => setEditing(ing)}>Rediger</button>
+
+              <button onClick={() => handleDelete(ing)}>Slet</button>
+            </div>
           </li>
         ))}
       </ul>
 
       <IngForm />
 
-    {editing && (
+      {editing && (
         <EditIngForm
           key={editing._id}
           editing={editing}

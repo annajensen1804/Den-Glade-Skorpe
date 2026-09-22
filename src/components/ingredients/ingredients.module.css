@@ -26,6 +26,17 @@
     }
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .form {
   max-width: 500px;
   margin: 0 auto;
