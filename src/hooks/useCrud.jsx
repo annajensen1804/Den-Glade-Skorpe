@@ -1,16 +1,20 @@
 import { serverPath } from "../settings";
 import { useRevalidator } from "react-router";
+import { useAuthContext } from "../context/useAuthContext";
 
 export const useCrud = () => {
+  const { token } = useAuthContext();
   const revalidator = useRevalidator();
+
+  const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
 
   const buildRequest = (method, body) => {
     if (body instanceof FormData) {
-      return { method, body };
+      return { method, headers: { ...authHeader }, body };
     }
     return {
       method,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...authHeader },
       body: JSON.stringify(body),
     }
   }
@@ -30,7 +34,10 @@ export const useCrud = () => {
   const remove = async (endpoint, id) => {
     if (!window.confirm("Er du dikker?")) return;
     const res = await fetch(
-      `${serverPath}/${endpoint}/${id}`, { method: "DELETE"}
+      `${serverPath}/${endpoint}/${id}`, { 
+        method: "DELETE",
+      ...authHeader
+    }
     );
     if (!res.ok) throw new Error("Kunne ikke slette");
     revalidator.revalidate();
