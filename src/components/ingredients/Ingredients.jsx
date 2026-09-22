@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router";
 import style from "./ingredients.module.css";
+import { useCrud } from "../../hooks/useCrud";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { serverPath } from "../../settings";
 import { useState } from "react";
-
 
 // Fælles validering skema
 const schema = yup.object().shape({
@@ -15,7 +15,9 @@ const schema = yup.object().shape({
 
 // Oprettelse form
 const IngForm = () => {
-  const {
+    const { create } = useCrud();
+    
+    const {
     register,
     handleSubmit,
     reset,
@@ -24,16 +26,11 @@ const IngForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await fetch(`${serverPath}/ingredient`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) return console.log("Fejl", res.status);
-      console.log("Oprettet:", await res.json());
+     await create("ingredient", data);
+      console.log("Oprettet!");
       reset();
     } catch (error) {
-      console.error("Netværksfejl:", error);
+        console.error("Netværksfejl", error.message);
     }
   };
 
@@ -61,7 +58,9 @@ const IngForm = () => {
 
 // Redigering form
 const EditIngForm = ({ editing, onClose }) => {
-  const {
+    const { update } = useCrud();
+    
+    const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -74,25 +73,16 @@ const EditIngForm = ({ editing, onClose }) => {
   });
 
   const onSubmit = async (data) => {
-
     try {
-      const res = await fetch(`${serverPath}/ingredient`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        await update("ingredient", {
           id: editing._id,
           name: data.name,
           description: data.description,
-        }),
       });
-
-      if (res.ok) {
-        onClose(); 
-      } else {
-        console.log("Fejl ved opdatering", res.status);
-      }
+      console.log("Opdateret!")
+      onClose();
     } catch (error) {
-      console.error("Netværksfejl:", error);
+      console.error("Netværksfejl:", error.message);
     }
   };
 
@@ -119,22 +109,12 @@ const EditIngForm = ({ editing, onClose }) => {
   );
 };
 
-const handleDelete = async (ing) => {
-    const sikker = window.confirm(`Vil du slette "${ing.name}"?`);
-    
-    if (!sikker) return;
-    
-    const res = await fetch(`${serverPath}/ingredient/${ing._id}`, {
-        method: "DELETE",
-    });
-        if (!res.ok) return console.log("Kunne ikke slette", res.status);
-        console.log("Slettet");
-}
-
 // List af ingredienser 
 const Ingredients = () => {
   const ingredients = useLoaderData();
   const [editing, setEditing] = useState(null);
+
+  const { remove } = useCrud();
 
   return (
     <section className={style.container}>
@@ -146,7 +126,7 @@ const Ingredients = () => {
             <div className={style.buttons}>
               <button onClick={() => setEditing(ing)}>Rediger</button>
 
-              <button onClick={() => handleDelete(ing)}>Slet</button>
+              <button onClick={() => remove("ingredient", ing._id)}>Slet</button>
             </div>
           </li>
         ))}
